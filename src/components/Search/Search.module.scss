@@ -1,0 +1,28 @@
+.searchContainer {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.searchBar {
+    width: 50%;
+    border-radius: 8px 0px 0px 8px;
+    height: 50px;
+    text-align: center;
+    font-size: 24px;
+    border-right: none;
+}
+
+.searchBar:focus {
+    outline: none;
+    text-align: left;
+    padding-left: 15px;
+}
+
+.searchBar:focus::placeholder {
+    opacity: 0;
+}
+
+.searchButton {
+    border-radius: 0px 8px 8px 0px;
+}
