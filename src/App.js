@@ -8,9 +8,11 @@ import Search from './components/Search/Search';
 import AlbumDisplay from './components/AlbumDisplay/AlbumDisplay';
 
 function App() {
+  
   const [usersArtist, setUsersArtist] = useState('');
   const [fetchedData, updateData] = useState({});
 
+  //Fetching Data from Deezer API
   const options = {
     method: 'GET',
     url: 'https://deezerdevs-deezer.p.rapidapi.com/search',
@@ -18,31 +20,37 @@ function App() {
     headers: {
       'X-RapidAPI-Key': 'aefccfdb5cmshe81d7fe93357fb7p1276a8jsn3c349238553a',
       'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
-    }
-  };
+      }
+    };
 
   async function main() {
     try {
       const response = await axios.request(options);
       updateData(response.data.data);
-    } catch (error) {
+    } 
+    catch (error) {
       console.log('error');
     }
   }
 
+  // Handle Artist Submit
+
   const handleClick = () => {
-    main()
+    if (usersArtist) {
+        main()
+    }
   }
 
+  //Creating User's Playlist
 
   let playlist = [];
-  console.log(fetchedData)
-  for (let i=0;i<2;i++) {
+  for (let i=0;i<4;i++) {
     let randomTrack = Math.floor(Math.random()*25)
     playlist.push(fetchedData[randomTrack])
   }
 
   console.log(playlist)
+
   return (
     <div className="App">
       <div className="w-100 vh-100 bg-light m-0">
@@ -51,10 +59,10 @@ function App() {
         <Search setUsersArtist={setUsersArtist}
                 usersArtist={usersArtist} 
                 handleClick={handleClick}/>
-        <div className="">
+        <div className="d-flex justify-content-center">
           <AlbumDisplay playlist={playlist}/>
         </div>
-        <div>
+        <div className='mt-5'>
           <button className="btn btn-primary disabled">Generate Your Playlist</button>
         </div>
       </div>
