@@ -13,10 +13,11 @@ function App() {
   const [fetchedData, updateData] = useState({});
 
   //Fetching Data from Deezer API
+
   const options = {
     method: 'GET',
-    url: 'https://deezerdevs-deezer.p.rapidapi.com/search',
-    params: {q: usersArtist},
+    url: `https://deezerdevs-deezer.p.rapidapi.com/search?q=${usersArtist}`,
+    //params: {q: usersArtist},
     headers: {
       'X-RapidAPI-Key': 'aefccfdb5cmshe81d7fe93357fb7p1276a8jsn3c349238553a',
       'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
@@ -33,18 +34,29 @@ function App() {
     }
   }
 
+
   // Handle Artist Submit
+  let [inputValue, setInputValue] = useState('')
+ 
+  const handleChange = (e) => {
+    let artist = e.target.value;
+    artist.toLowerCase().replaceAll(' ', '-');
+    setInputValue(artist);
+    setUsersArtist(inputValue)
+  }
 
   const handleClick = () => {
+    setInputValue('')
     if (usersArtist) {
         main()
     }
+
   }
 
   //Creating User's Playlist
 
   let playlist = [];
-  for (let i=0;i<4;i++) {
+  for (let i=0;i<2;i++) {
     let randomTrack = Math.floor(Math.random()*25)
     playlist.push(fetchedData[randomTrack])
   }
@@ -56,9 +68,9 @@ function App() {
       <div className="w-100 vh-100 bg-light m-0">
         <Navbar />
         <div className="w-50 text-center m-auto fs-1 fw-bold text-dark mt-5">Produce Your Album. <br /> Curate Your Sound.</div>
-        <Search setUsersArtist={setUsersArtist}
-                usersArtist={usersArtist} 
-                handleClick={handleClick}/>
+        <Search inputValue={inputValue}
+                handleClick={handleClick}
+                handleChange={handleChange}/>
         <div className="d-flex justify-content-center">
           <AlbumDisplay playlist={playlist}/>
         </div>
