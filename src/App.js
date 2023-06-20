@@ -30,7 +30,7 @@ function App() {
       updateData(response.data.data);
     } 
     catch (error) {
-      console.log('error');
+      console.error('error');
     }
   }
 
@@ -42,25 +42,29 @@ function App() {
     let artist = e.target.value;
     artist.toLowerCase().replaceAll(' ', '-');
     setInputValue(artist);
-    setUsersArtist(inputValue)
+    setUsersArtist(inputValue);
   }
 
-  const handleClick = () => {
+  const handleClickSubmit = () => {
     setInputValue('')
     if (usersArtist) {
         main()
     }
+  }
 
+  const handleClickAlbum = () => {
+    //This will bring user to a different page where they can listen to the random song
+      //Should i give them three options? Albums to choose from.
   }
 
   //Creating User's Playlist
 
   let playlist = [];
-  for (let i=0;i<2;i++) {
+  for (let i=0;i<1;i++) {
     let randomTrack = Math.floor(Math.random()*25)
     playlist.push(fetchedData[randomTrack])
   }
-
+  console.log(fetchedData)
   console.log(playlist)
 
   return (
@@ -69,7 +73,7 @@ function App() {
         <Navbar />
         <div className="w-50 text-center m-auto fs-1 fw-bold text-dark mt-5">Produce Your Album. <br /> Curate Your Sound.</div>
         <Search inputValue={inputValue}
-                handleClick={handleClick}
+                handleClickSubmit={handleClickSubmit}
                 handleChange={handleChange}/>
         <div className="d-flex justify-content-center">
           <AlbumDisplay playlist={playlist}/>

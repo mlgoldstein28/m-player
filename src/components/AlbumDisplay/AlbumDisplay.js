@@ -8,7 +8,7 @@ const AlbumDisplay = ({playlist}) => {
            console.log(album.cover)
 
     return (
-        <div className="d-flex justify-content-center mt-5">
+        <div key={album.id} className="d-flex justify-content-center mt-5">
             <div className={`${styles.albumContainer} shadow-lg`}>
                 <img className={styles.album} src={album.cover} />
             </div>
