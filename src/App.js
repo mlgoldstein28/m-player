@@ -71,15 +71,12 @@ function App() {
     <div className="App">
       <div className="w-100 vh-100 bg-light m-0">
         <Navbar />
-        <div className="w-50 text-center m-auto fs-1 fw-bold text-dark mt-5">Produce Your Album. <br /> Curate Your Sound.</div>
+        <div className="w-50 text-center m-auto fs-1 fw-bold text-dark mt-5 border-bottom border-dark pb-3">Find Your New Favorite Song</div>
         <Search inputValue={inputValue}
                 handleClickSubmit={handleClickSubmit}
                 handleChange={handleChange}/>
         <div className="d-flex justify-content-center">
           <AlbumDisplay playlist={playlist}/>
-        </div>
-        <div className='mt-5'>
-          <button className="btn btn-primary disabled">Generate Your Playlist</button>
         </div>
       </div>
     </div>
